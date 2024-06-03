@@ -3,10 +3,11 @@ package basics_launch;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Amazon_ShoeAutosuggestion
+public class Amazon_FirstShoeToCart
 {
 	public static void main(String[] args) throws InterruptedException 
 	{
@@ -15,13 +16,17 @@ public class Amazon_ShoeAutosuggestion
 		Thread.sleep(2000);
 		WebElement search=driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
 		search.sendKeys("shoes");
+		search.sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
 		
-		List<WebElement> auto_suggestion=driver.findElements(By.xpath("//div[@class='two-pane-results-container']/div/div"));
-		int count=auto_suggestion.size();
-		System.out.println(count);
+		WebElement selection=driver.findElement(By.xpath("(//span[@class='rush-component'])[4]"));
 		Thread.sleep(1000);
-		auto_suggestion.get(count-6).click();
+		selection.click();
+		
+		Thread.sleep(1000);
+		driver.findElement(By.id("add-to-cart-button")).click();
+		//Thread.sleep(1000);
+		
 	}
 
 }
